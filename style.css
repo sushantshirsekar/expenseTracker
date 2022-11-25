@@ -1,0 +1,35 @@
+body{
+    background-color: rgb(247, 194, 247);
+    top: 0px;
+    margin: 0px;
+}
+.container{
+    text-align: center;
+    border: 1px solid red;
+    background-color: bisque;
+    width: 400px;
+    height: 280px;
+    margin: auto;
+}
+input, button{
+    color: black;
+}
+
+.expense-List{
+    list-style: none;
+    text-align: center;
+    font-family: cursive;
+}
+
+.container2{
+    height: auto;
+    width: 400px;
+    border: 1px solid gray;
+    text-align: center;
+    margin: auto;
+    background-color: rgb(169, 216, 245);
+}
+
+#display{
+    text-align: center;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Track Expense</h2>
+        <div class="form-container">
+            <form onsubmit="getDetails(event)">
+                <label for="seqId">Serial Number:</label>
+                <input type="number" name="seq" id="seqId" placeholder="Enter Last Serial No." required><br><br>
+                <label for="amnt">Amount Spend: </label>
+                <input type="number" id="amnt" name="amntName" placeholder="Amount Spent" required><br><br>
+                <label for="rsn">Description: </label>
+                <input type="text" id="rsn" name="rsnName" placeholder="Description of spent" required><br><br>
+                <label for="spent">Spent ON:</label><br>
+                <select name="category" id="spent" required>
+                    <option value="Movie">Movie</option>
+                    <option value="Monthly-Expense">Monthly-Expense</option>
+                    <option value="Ration">Ration</option>
+                    <option value="Books">Books</option>
+                </select><br><br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="container2">
+        <h3>List Of Expenses</h3>
+        <ul id="display">
+            
+        </ul>
+    </div>
+    <script src="index.js">
+
+    </script>
+</body>
+</html>
