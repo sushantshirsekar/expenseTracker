@@ -16,7 +16,7 @@ function getDetails(event)
         rsnInput,
         categoryInput
     }
-    axios.post('https://crudcrud.com/api/2c1816e2d7c34a889158bb4f8e903caa/appointmentData',details)
+    axios.post('https://crudcrud.com/api/1320a9380a994ddd99fcb22dd0a35a29/appointmentData',details)
     .then((res)=>{
         displayDetails(res.data);
         console.log(res);
@@ -39,7 +39,7 @@ function displayDetails(obj)
     <li class="expense-List" id=${obj._id}>
     ${obj.seqInput}: ${obj.amntInput} ${obj.rsnInput} ${obj.categoryInput}
     <button onClick=deleteDisplay('${obj._id}')>Delete</button>
-    <button onClick=editDisplay('${obj.seqInput}','${obj.amntInput}','${obj.rsnInput}','${obj.categoryInput}')>
+    <button onClick=editDisplay('${obj._id}')>
     Edit</button>
     </li><br>`
     listExpense.innerHTML = listExpense.innerHTML + childHtml ;
@@ -57,7 +57,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // }
 
 
-    axios.get('https://crudcrud.com/api/2c1816e2d7c34a889158bb4f8e903caa/appointmentData')
+    axios.get('https://crudcrud.com/api/1320a9380a994ddd99fcb22dd0a35a29/appointmentData')
     .then((res)=>{
         for(let i = 0; i < res.data.length; i++)
         {
@@ -72,7 +72,7 @@ function deleteDisplay(seq)
 {
     // localStorage.removeItem(seqInput);
 
-    axios.delete(`https://crudcrud.com/api/2c1816e2d7c34a889158bb4f8e903caa/appointmentData/${seq}`)
+    axios.delete(`https://crudcrud.com/api/1320a9380a994ddd99fcb22dd0a35a29/appointmentData/${seq}`)
     .then((res)=>{
         console.log(res);
         removeDisplay(seq);
@@ -89,11 +89,19 @@ function removeDisplay(id)
     }
 }
 
-function editDisplay(seqInput, amntInput, rsnInput, categoryInput)
+function editDisplay(id)
 {
-    document.getElementById('seqId').value = seqInput;
-    document.getElementById('amnt').value = amntInput;
-    document.getElementById('rsn').value = rsnInput;
-    document.getElementById('spent').value = categoryInput;
-    deleteDisplay(seqInput);
+    // document.getElementById('seqId').value = seqInput;
+    // document.getElementById('amnt').value = amntInput;
+    // document.getElementById('rsn').value = rsnInput;
+    // document.getElementById('spent').value = categoryInput;
+
+    axios.get(`https://crudcrud.com/api/1320a9380a994ddd99fcb22dd0a35a29/appointmentData/${id}`)
+    .then((res)=>{
+        document.getElementById('seqId').value = res.data.seqInput;
+        document.getElementById('amnt').value = res.data.amntInput;
+        document.getElementById('rsn').value = res.data.rsnInput;
+        document.getElementById('spent').value = res.data.categoryInput;
+    })
+    deleteDisplay(id);
 }
