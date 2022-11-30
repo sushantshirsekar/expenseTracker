@@ -16,7 +16,7 @@ function getDetails(event)
         rsnInput,
         categoryInput
     }
-    axios.post('https://crudcrud.com/api/c17fe42dc3fa4114b3eda1a798d7cb14/appointmentData',details)
+    axios.post('https://crudcrud.com/api/2c1816e2d7c34a889158bb4f8e903caa/appointmentData',details)
     .then((res)=>{
         displayDetails(res.data);
         console.log(res);
@@ -36,9 +36,9 @@ function displayDetails(obj)
     // }
     const listExpense = document.getElementById('display');
     const childHtml = `
-    <li class="expense-List" id=${obj.seqInput}>
+    <li class="expense-List" id=${obj._id}>
     ${obj.seqInput}: ${obj.amntInput} ${obj.rsnInput} ${obj.categoryInput}
-    <button onClick=deleteDisplay('${obj.seqInput}')>Delete</button>
+    <button onClick=deleteDisplay('${obj._id}')>Delete</button>
     <button onClick=editDisplay('${obj.seqInput}','${obj.amntInput}','${obj.rsnInput}','${obj.categoryInput}')>
     Edit</button>
     </li><br>`
@@ -57,7 +57,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // }
 
 
-    axios.get('https://crudcrud.com/api/c17fe42dc3fa4114b3eda1a798d7cb14/appointmentData')
+    axios.get('https://crudcrud.com/api/2c1816e2d7c34a889158bb4f8e903caa/appointmentData')
     .then((res)=>{
         for(let i = 0; i < res.data.length; i++)
         {
@@ -68,16 +68,21 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-function deleteDisplay(seqInput)
+function deleteDisplay(seq)
 {
-    localStorage.removeItem(seqInput);
-    removeDisplay(seqInput);
+    // localStorage.removeItem(seqInput);
+
+    axios.delete(`https://crudcrud.com/api/2c1816e2d7c34a889158bb4f8e903caa/appointmentData/${seq}`)
+    .then((res)=>{
+        console.log(res);
+        removeDisplay(seq);
+    })
 }
 
-function removeDisplay(seqInput)
+function removeDisplay(id)
 {
     let parentNode = document.getElementById('display');
-    let childToBeDeleted = document.getElementById(seqInput);
+    let childToBeDeleted = document.getElementById(id);
     if(childToBeDeleted)
     {
         parentNode.removeChild(childToBeDeleted);
